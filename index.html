@@ -385,70 +385,84 @@
 
         </div><!-- end of container -->
     </section><!-- end of blog section -->
-
     <!-- contact section -->
     <section class="section" id="contact">
         <div class="container text-center">
             <p class="section-subtitle">How can you communicate?</p>
             <h6 class="section-title mb-5">Contact Me</h6>
-            <form id="contactForm" data-sb-form-api-token="0e4cc00e-ce8c-4393-8b4b-e2e411cc2efb"
-                class="contact-form col-md-10 col-lg-8 m-auto">
+            <form id="contactForm" class="contact-form col-md-10 col-lg-8 m-auto">
                 <div class="form-row">
                     <!-- Name -->
                     <div class="form-group col-sm-6">
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
+                        <input type="text" id="name" name="from_name" class="form-control" placeholder="Your Name"
+                            required>
                         <small id="nameError" style="color:red; display:none;">
                             Please enter a valid name (letters only).
                         </small>
                     </div>
                     <!-- Email -->
                     <div class="form-group col-sm-6">
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+                        <input type="email" id="email" name="from_email" class="form-control" placeholder="Enter Email"
                             required>
                     </div>
                     <!-- Message -->
                     <div class="form-group col-sm-12">
-                        <textarea name="comment" id="comment" rows="6" class="form-control"
+                        <textarea name="message" id="message" rows="6" class="form-control"
                             placeholder="Write Something" required></textarea>
                     </div>
                     <!-- Submit -->
                     <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" id="submitButton" value="Send Message"
-                            class="btn btn-outline-primary rounded">
+                        <button type="submit" class="btn btn-outline-primary rounded" id="submitButton">Send
+                            Message</button>
                     </div>
                 </div>
 
                 <!-- Success & Error Messages -->
-                <div class="d-none" id="submitSuccessMessage">
+                <div class="d-none" id="successMsg">
                     <div class="text-success mt-3">Message sent successfully! 🎉</div>
                 </div>
-                <div class="d-none" id="submitErrorMessage">
+                <div class="d-none" id="errorMsg">
                     <div class="text-danger mt-3">Error sending message. Please try again!</div>
                 </div>
             </form>
         </div>
     </section>
 
-    <!-- Validation Script -->
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
+        (function () {
+            emailjs.init("uzyNaAcng93nBPLoN"); // Your Public Key
+        })();
+
         document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Name validation
             const nameInput = document.getElementById("name");
             const nameError = document.getElementById("nameError");
             const namePattern = /^[A-Za-z\s]+$/;
-
             if (!namePattern.test(nameInput.value.trim())) {
                 nameError.style.display = "block";
                 nameInput.style.border = "2px solid red";
-                event.preventDefault();
+                return;
             } else {
                 nameError.style.display = "none";
                 nameInput.style.border = "1px solid #ccc";
             }
+
+            // Send email using EmailJS
+            emailjs.sendForm("service_f4hat9m", "template_y0yih92", this)
+                .then(() => {
+                    document.getElementById("successMsg").classList.remove("d-none");
+                    document.getElementById("errorMsg").classList.add("d-none");
+                    this.reset();
+                }, () => {
+                    document.getElementById("successMsg").classList.add("d-none");
+                    document.getElementById("errorMsg").classList.remove("d-none");
+                });
         });
     </script>
-
-    <!-- SB Forms Script -->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 
 
