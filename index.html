@@ -386,7 +386,7 @@
         </div><!-- end of container -->
     </section><!-- end of blog section -->
 
-
+    <!-- contact section -->
     <section class="section" id="contact">
         <div class="container text-center">
             <p class="section-subtitle">How can you communicate?</p>
@@ -394,21 +394,27 @@
             <form id="contactForm" data-sb-form-api-token="0e4cc00e-ce8c-4393-8b4b-e2e411cc2efb"
                 class="contact-form col-md-10 col-lg-8 m-auto">
                 <div class="form-row">
+                    <!-- Name -->
                     <div class="form-group col-sm-6">
                         <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
-                        <small id="nameError" style="color:red; display:none;">Please enter a valid name (letters
-                            only).</small>
+                        <small id="nameError" style="color:red; display:none;">
+                            Please enter a valid name (letters only).
+                        </small>
                     </div>
+                    <!-- Email -->
                     <div class="form-group col-sm-6">
                         <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
                             required>
                     </div>
+                    <!-- Message -->
                     <div class="form-group col-sm-12">
                         <textarea name="comment" id="comment" rows="6" class="form-control"
                             placeholder="Write Something" required></textarea>
                     </div>
+                    <!-- Submit -->
                     <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
+                        <input type="submit" id="submitButton" value="Send Message"
+                            class="btn btn-outline-primary rounded">
                     </div>
                 </div>
 
@@ -443,6 +449,7 @@
 
     <!-- SB Forms Script -->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
 
 
     <!-- footer -->
